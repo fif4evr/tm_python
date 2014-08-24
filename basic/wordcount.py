@@ -38,7 +38,23 @@ print_words() and print_top().
 """
 
 import sys
-
+dict = {}
+def print_words(filename):
+  f = open(filename,'rU')
+  # for line in f:
+  #   for word in line.split():
+  #     if word.lower() in dict.keys():
+  #       dict[word.lower()] += 1
+  #     else:
+  #       dict[word.lower()] = 1
+  # ##############I ACCIDENTALLY DID SOMETHING VERY SLOW... I FIXED IT BELOW
+  for word in f.read().split():
+    if word.lower() in dict:
+      dict[word.lower()] += 1
+    else:
+      dict[word.lower()] = 1
+  for k, v in sorted(dict.items()): print k, v
+  f.close()
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
