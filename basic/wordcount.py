@@ -38,8 +38,18 @@ print_words() and print_top().
 """
 
 import sys
-dict = {}
 def print_words(filename):
+  dict_of_words = helper_function(filename)
+  for k, v in sorted(dict_of_words.items()): print k, v
+
+# +++your code here+++
+# Define print_words(filename) and print_top(filename) functions.
+# You could write a helper utility function that reads a file
+# and builds and returns a word/count dict for it.
+# Then print_words() and print_top() can just call the utility function.
+
+def helper_function(filename):
+  dict = {}
   f = open(filename,'rU')
   # for line in f:
   #   for word in line.split():
@@ -53,15 +63,20 @@ def print_words(filename):
       dict[word.lower()] += 1
     else:
       dict[word.lower()] = 1
-  for k, v in sorted(dict.items()): print k, v
-  f.close()
-# +++your code here+++
-# Define print_words(filename) and print_top(filename) functions.
-# You could write a helper utility function that reads a file
-# and builds and returns a word/count dict for it.
-# Then print_words() and print_top() can just call the utility function.
-
+  f.close
+  return dict
 ###
+
+def print_top(filename):
+  list_of_words = helper_function(filename).items()
+  sorted_list = sorted(list_of_words, reverse=True, key=val_ret)
+  x = 0
+  while x < 20:
+    print sorted_list[x][0], sorted_list[x][1]
+    x += 1
+
+def val_ret(tuple):
+  return tuple[-1]
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
