@@ -75,6 +75,11 @@ def print_top(filename):
     print sorted_list[x][0], sorted_list[x][1]
     x += 1
 
+def print_total(filename):
+  dict_of_words = helper_function(filename)
+  total = len(dict_of_words.keys())
+  print 'There are %d total distinct words in %s' % (total, filename)
+
 def val_ret(tuple):
   return tuple[-1]
 
@@ -82,7 +87,7 @@ def val_ret(tuple):
 # calls the print_words() and print_top() functions which you must define.
 def main():
   if len(sys.argv) != 3:
-    print 'usage: ./wordcount.py {--count | --topcount} file'
+    print 'usage: ./wordcount.py {--count | --topcount | --totalwords} file'
     sys.exit(1)
 
   option = sys.argv[1]
@@ -91,6 +96,8 @@ def main():
     print_words(filename)
   elif option == '--topcount':
     print_top(filename)
+  elif option == '--totalwords':
+    print_total(filename)
   else:
     print 'unknown option: ' + option
     sys.exit(1)
