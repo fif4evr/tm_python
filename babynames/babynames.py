@@ -46,14 +46,7 @@ def extract_names(filename):
   match = re.search(r'(Popularity in )(\d\d\d\d)',file_string)
   ranks_names = re.findall(r'<tr align="right"><td>(\d*)</td><td>(\w*)</td><td>(\w*)</td>',file_string)
   all_names =  ranks_names
-  names_dict = {}
   names_list = []
-  # import pdb; pdb.set_trace()
-  # for name in all_names:
-  #   index = name[0]
-  #   boys_name = name[1]
-  #   girls_name = name[2]
-  #   names_dict[index] = (boys_name,girls_name)
   for name in all_names:
     names_list.append(name[1] + ' ' + name[0])
     names_list.append(name[2] + ' ' + name[0])
