@@ -41,8 +41,29 @@ def extract_names(filename):
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
   # +++your code here+++
-  return
+  f = open(filename, 'r')
+  file_string = f.read()
+  match = re.search(r'(Popularity in )(\d\d\d\d)',file_string)
+  ranks_names = re.findall(r'<tr align="right"><td>(\d*)</td><td>(\w*)</td><td>(\w*)</td>',file_string)
+  all_names =  ranks_names
+  names_dict = {}
+  names_list = []
+  # import pdb; pdb.set_trace()
+  # for name in all_names:
+  #   index = name[0]
+  #   boys_name = name[1]
+  #   girls_name = name[2]
+  #   names_dict[index] = (boys_name,girls_name)
+  for name in all_names:
+    names_list.append(name[1] + ' ' + name[0])
+    names_list.append(name[2] + ' ' + name[0])
+  sorted_list = sorted(names_list,key=returnFirstWord)
+  sorted_list.insert(0,match.group(2))  
+  return sorted_list
 
+def returnFirstWord(name_and_rank):
+  name = re.search(r'(\w*)\s',name_and_rank)
+  return name.group(1)
 
 def main():
   # This command-line parsing code is provided.
@@ -59,10 +80,18 @@ def main():
   if args[0] == '--summaryfile':
     summary = True
     del args[0]
+    file = open("output.txt", "w")
+    list_to_write = extract_names(args[0])
+    for list_item in list_to_write:
+      file.write(list_item+ '\n')
+    file.close()
+    print 'The contents have been output in the aptly-named output.txt'
 
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
-  
+  else:
+    print extract_names(args[0])
+
 if __name__ == '__main__':
   main()
